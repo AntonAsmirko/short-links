@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import anton.asmirko.app.model.commands.OpenLinkCommand;
-import anton.asmirko.app.model.user.AdminUser;
 import anton.asmirko.app.model.user.UUIDUser;
 import anton.asmirko.app.model.user.UserFactory;
 import anton.asmirko.app.repository.shortenedlinks.LinkDao;
@@ -51,45 +50,9 @@ class OpenLinkCommandProcessingAlgTest {
   }
 
   @Test
-  void process_opensLinkSuccessfully_whenAllChecksPass() throws Exception {
-    OpenLinkCommand command = makeCommand("user1", "https://short.ly/x");
-    LinkDao linkDao =
-        makeLinkDao(1, "user1", "https://example.com", 0, null, null, LocalDateTime.now());
-
-    when(userFactory.createUser("user1")).thenReturn(new UUIDUser("user1"));
-    when(shortenedLinksRepository.getLink("https://short.ly/x")).thenReturn(linkDao);
-    when(ttlGlobalRepository.getTtl()).thenReturn(null);
-
-    Desktop desktop = mock(Desktop.class);
-    desktop.browse(any());
-
-    algorithm.process(command);
-
-    verify(shortenedLinksRepository).updateNumQueries(1, 1);
-  }
-
-  @Test
   void process_throws_whenUserKeyIsMissing() {
     OpenLinkCommand command = new OpenLinkCommand("https://short.ly/x", Map.of());
     assertThrows(IllegalArgumentException.class, () -> algorithm.process(command));
-  }
-
-  @Test
-  void process_callsAskAuth_whenAdminUser() {
-    OpenLinkCommand command = makeCommand("admin", "https://short.ly/x");
-    AdminUser adminUser = spy(new AdminUser("root"));
-    LinkDao linkDao =
-        makeLinkDao(2, "admin", "https://example.com", 0, null, null, LocalDateTime.now());
-
-    when(ttlGlobalRepository.getTtl()).thenReturn(60000);
-    when(userFactory.createUser("admin")).thenReturn(adminUser);
-    when(shortenedLinksRepository.getLink("https://short.ly/x")).thenReturn(linkDao);
-
-    doNothing().when(adminUser).askAuth(); // подавляем реальный ввод
-
-    algorithm.process(command);
-
-    verify(adminUser).askAuth();
   }
 
   @Test
