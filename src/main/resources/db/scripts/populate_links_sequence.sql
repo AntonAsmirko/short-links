@@ -1,0 +1,1 @@
+INSERT INTO links_sequence (name, val) VALUES ('links_seq', 1);

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+           http://www.liquibase.org/xml/ns/dbchangelog
+           http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+    <changeSet id="1" author="asmirko">
+        <sqlFile path="scripts/enable_foreign_keys.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    <changeSet id="2" author="asmirko">
+        <sqlFile path="scripts/create_users_table.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    <changeSet id="3" author="asmirko">
+        <sqlFile path="scripts/create_links_table.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    <changeSet id="4" author="asmirko">
+        <sqlFile path="scripts/create_links_squence.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    <changeSet id="5" author="asmirko">
+        <sqlFile path="scripts/populate_links_sequence.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    <changeSet id="6" author="asmirko">
+        <sqlFile path="scripts/create_shortened_links_table.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    <changeSet id="7" author="asmirko">
+        <sqlFile path="scripts/add_admin_user.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    <changeSet id="8" author="asmirko">
+        <sqlFile path="scripts/create_global_ttl_table.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    <changeSet id="9" author="asmirko">
+        <sqlFile path="scripts/populate_ttl_global_table.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+</databaseChangeLog>

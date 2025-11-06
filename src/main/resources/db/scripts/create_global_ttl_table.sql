@@ -1,0 +1,4 @@
+CREATE TABLE ttl_global (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ttl INTEGER
+);

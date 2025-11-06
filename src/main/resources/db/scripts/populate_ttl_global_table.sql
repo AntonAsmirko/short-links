@@ -1,0 +1,1 @@
+INSERT INTO ttl_global (id, ttl) VALUES (1, 111111111);
